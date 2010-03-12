@@ -14,6 +14,11 @@
 #define	kQCPlugIn_Name				@"GhostWriter"
 #define	kQCPlugIn_Description		@"GhostWriter description"
 
+// WORKAROUND - naming violation for cocoa memory management
+@interface QCPlugIn(GhostWriterAdditions)
+- (QCPlugInViewController*)createViewController NS_RETURNS_RETAINED;
+@end
+
 @implementation GhostWriterPlugIn
 
 /*
