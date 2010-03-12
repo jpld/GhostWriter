@@ -136,7 +136,7 @@
 
 - (BOOL)execute:(id<QCPlugInContext>)context atTime:(NSTimeInterval)time withArguments:(NSDictionary*)arguments {
     // only process input on the rising edge
-    if (![self didValueForInputKeyChange:@"inputWriteSignal"])
+    if (!([self didValueForInputKeyChange:@"inputWriteSignal"] && self.inputWriteSignal))
         return YES;
 
     GWDebugLogSelector();
