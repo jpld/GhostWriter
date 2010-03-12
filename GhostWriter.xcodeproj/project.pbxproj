@@ -19,6 +19,18 @@
 			name = "Build & Copy";
 			productName = "Build & Install";
 		};
+		D8A73DF5114A2850007B53A7 /* Build & Create Archive  */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = D8A73E02114A289C007B53A7 /* Build configuration list for PBXAggregateTarget "Build & Create Archive " */;
+			buildPhases = (
+				D8A73DFB114A2869007B53A7 /* Create Archive */,
+			);
+			dependencies = (
+				D8A73DF9114A2862007B53A7 /* PBXTargetDependency */,
+			);
+			name = "Build & Create Archive ";
+			productName = "Build & Create Archive ";
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -34,6 +46,13 @@
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8D5B49AC048680CD000E48DA;
+			remoteInfo = GhostWriter;
+		};
+		D8A73DF8114A2862007B53A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D5B49AC048680CD000E48DA /* GhostWriter */;
 			remoteInfo = GhostWriter;
 		};
 /* End PBXContainerItemProxy section */
@@ -160,6 +179,7 @@
 			targets = (
 				8D5B49AC048680CD000E48DA /* GhostWriter */,
 				233E2C640A83C768005A62DF /* Build & Copy */,
+				D8A73DF5114A2850007B53A7 /* Build & Create Archive  */,
 			);
 		};
 /* End PBXProject section */
@@ -189,6 +209,20 @@
 			shellPath = /bin/sh;
 			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/GhostWriter.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/GhostWriter.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
 		};
+		D8A73DFB114A2869007B53A7 /* Create Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Create Archive";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rake create_archive build_path=\"$BUILT_PRODUCTS_DIR/GhostWriter.plugin\" version=\"$PRODUCT_VERSION\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -207,6 +241,11 @@
 			isa = PBXTargetDependency;
 			target = 8D5B49AC048680CD000E48DA /* GhostWriter */;
 			targetProxy = 233E2C650A83C76D005A62DF /* PBXContainerItemProxy */;
+		};
+		D8A73DF9114A2862007B53A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D5B49AC048680CD000E48DA /* GhostWriter */;
+			targetProxy = D8A73DF8114A2862007B53A7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -318,6 +357,27 @@
 			};
 			name = Release;
 		};
+		D8A73DF6114A2850007B53A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Build & Create Archive ";
+			};
+			name = Debug;
+		};
+		D8A73DF7114A2850007B53A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "Build & Create Archive ";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -344,6 +404,15 @@
 			buildConfigurations = (
 				233E2D8A0A83C7AC005A62DF /* Debug */,
 				233E2D8B0A83C7AC005A62DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8A73E02114A289C007B53A7 /* Build configuration list for PBXAggregateTarget "Build & Create Archive " */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8A73DF6114A2850007B53A7 /* Debug */,
+				D8A73DF7114A2850007B53A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
