@@ -20,6 +20,8 @@
 
 @implementation GhostWriterPlugIn
 
+@dynamic inputImage, inputWriteSignal;
+
 /*
 Here you need to declare the input / output properties as dynamic as Quartz Composer will handle their implementation
 @dynamic inputFoo, outputBar;
@@ -34,11 +36,12 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 }
 
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {
-	/*
-	Specify the optional attributes for property based ports (QCPortAttributeNameKey, QCPortAttributeDefaultValueKey...).
-	*/
-
-	return nil;
+    // TODO - localize?
+    if ([key isEqualToString:@"inputImage"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Image", QCPortAttributeNameKey, nil];
+    else if ([key isEqualToString:@"inputWriteSignal"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Write Signal", QCPortAttributeNameKey, nil];
+    return nil;
 }
 
 + (QCPlugInExecutionMode)executionMode {
@@ -130,14 +133,11 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 }
 
 - (BOOL)execute:(id<QCPlugInContext>)context atTime:(NSTimeInterval)time withArguments:(NSDictionary*)arguments {
-	/*
-	Called by Quartz Composer whenever the plug-in instance needs to execute.
-	Only read from the plug-in inputs and produce a result (by writing to the plug-in outputs or rendering to the destination OpenGL context) within that method and nowhere else.
-	Return NO in case of failure during the execution (this will prevent rendering of the current frame to complete).
-	
-	The OpenGL context for rendering can be accessed and defined for CGL macros using:
-	CGLContextObj cgl_ctx = [context CGLContextObj];
-	*/
+    // only process input on the rising edge
+    if (![self didValueForInputKeyChange:@"inputWriteSignal"])
+        return YES;
+
+    // TODO - actually do something
 
 	return YES;
 }

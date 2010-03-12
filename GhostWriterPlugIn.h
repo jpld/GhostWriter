@@ -9,4 +9,6 @@
 #import <Quartz/Quartz.h>
 
 @interface GhostWriterPlugIn : QCPlugIn {}
+@property (nonatomic, assign) id<QCPlugInInputImageSource> inputImage;
+@property (nonatomic) BOOL inputWriteSignal;
 @end
