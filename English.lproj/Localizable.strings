@@ -5,3 +5,6 @@
    Created by jpld on 12 Mar 2010.
    Copyright (c) 2010 __MyCompanyName__. All rights reserved.
  */
+
+"kQCPlugIn_Name" = "GhostWriter";
+"kQCPlugIn_Description" = "This patch writes an image to disk on the rising edge of the 'Write Signal' input.\n\nhttp://github.com/jpld/GhostWriter";

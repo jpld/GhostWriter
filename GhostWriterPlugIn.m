@@ -8,8 +8,15 @@
 
 #import "GhostWriterPlugIn.h"
 
-#define	kQCPlugIn_Name              @"GhostWriter"
-#define	kQCPlugIn_Description       @"This patch writes an image to disk on the rising edge of the 'Write Signal' input."
+#if CONFIGURATION == DEBUG
+    #define GWDebugLogSelector() NSLog(@"-[%@ %@]", /*NSStringFromClass([self class])*/self, NSStringFromSelector(_cmd))
+    #define GWDebugLog(a...) NSLog(a)
+#else
+    #define GWDebugLogSelector()
+    #define GWDebugLog(a...)
+#endif
+
+#define GWLocalizedString(key, comment) [[NSBundle bundleForClass:[self class]] localizedStringForKey:(key) value:@"" table:(nil)]
 
 
 // WORKAROUND - naming violation for cocoa memory management
@@ -23,11 +30,7 @@
 @dynamic inputImage, inputDestinationFilePath, inputWriteSignal;
 
 + (NSDictionary*)attributes {
-    /*
-    Return a dictionary of attributes describing the plug-in (QCPlugInAttributeNameKey, QCPlugInAttributeDescriptionKey...).
-    */
-
-    return [NSDictionary dictionaryWithObjectsAndKeys:kQCPlugIn_Name, QCPlugInAttributeNameKey, kQCPlugIn_Description, QCPlugInAttributeDescriptionKey, nil];
+	return [NSDictionary dictionaryWithObjectsAndKeys:GWLocalizedString(@"kQCPlugIn_Name", NULL), QCPlugInAttributeNameKey, GWLocalizedString(@"kQCPlugIn_Description", NULL), QCPlugInAttributeDescriptionKey, nil];
 }
 
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {
