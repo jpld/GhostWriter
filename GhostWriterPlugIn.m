@@ -135,6 +135,10 @@
 }
 
 - (BOOL)execute:(id<QCPlugInContext>)context atTime:(NSTimeInterval)time withArguments:(NSDictionary*)arguments {
+    // bail if we don't have an input
+    if (!self.inputImage)
+        return YES;
+
     // only process input on the rising edge
     if (!([self didValueForInputKeyChange:@"inputWriteSignal"] && self.inputWriteSignal))
         return YES;
