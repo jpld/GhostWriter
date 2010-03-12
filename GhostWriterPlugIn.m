@@ -38,7 +38,7 @@
     if ([key isEqualToString:@"inputImage"])
         return [NSDictionary dictionaryWithObjectsAndKeys:@"Image", QCPortAttributeNameKey, nil];
     else if ([key isEqualToString:@"inputDestinationFilePath"])
-        return [NSDictionary dictionaryWithObjectsAndKeys:@"Destination File Path", QCPortAttributeNameKey, nil];
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Destination File Path", QCPortAttributeNameKey, @"~/Desktop", QCPortAttributeDefaultValueKey, nil];
     else if ([key isEqualToString:@"inputWriteSignal"])
         return [NSDictionary dictionaryWithObjectsAndKeys:@"Write Signal", QCPortAttributeNameKey, nil];
     return nil;
