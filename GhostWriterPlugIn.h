@@ -10,5 +10,6 @@
 
 @interface GhostWriterPlugIn : QCPlugIn {}
 @property (nonatomic, assign) id<QCPlugInInputImageSource> inputImage;
+@property (nonatomic, assign) NSString* inputDestinationFilePath;
 @property (nonatomic) BOOL inputWriteSignal;
 @end

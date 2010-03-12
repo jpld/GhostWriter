@@ -8,8 +8,8 @@
 
 #import "GhostWriterPlugIn.h"
 
-#define	kQCPlugIn_Name				@"GhostWriter"
-#define	kQCPlugIn_Description		@"This patch writes an image to disk on the rising edge of the 'Write Signal' input."
+#define	kQCPlugIn_Name              @"GhostWriter"
+#define	kQCPlugIn_Description       @"This patch writes an image to disk on the rising edge of the 'Write Signal' input."
 
 
 // WORKAROUND - naming violation for cocoa memory management
@@ -20,25 +20,22 @@
 
 @implementation GhostWriterPlugIn
 
-@dynamic inputImage, inputWriteSignal;
-
-/*
-Here you need to declare the input / output properties as dynamic as Quartz Composer will handle their implementation
-@dynamic inputFoo, outputBar;
-*/
+@dynamic inputImage, inputDestinationFilePath, inputWriteSignal;
 
 + (NSDictionary*)attributes {
-	/*
-	Return a dictionary of attributes describing the plug-in (QCPlugInAttributeNameKey, QCPlugInAttributeDescriptionKey...).
-	*/
+    /*
+    Return a dictionary of attributes describing the plug-in (QCPlugInAttributeNameKey, QCPlugInAttributeDescriptionKey...).
+    */
 
-	return [NSDictionary dictionaryWithObjectsAndKeys:kQCPlugIn_Name, QCPlugInAttributeNameKey, kQCPlugIn_Description, QCPlugInAttributeDescriptionKey, nil];
+    return [NSDictionary dictionaryWithObjectsAndKeys:kQCPlugIn_Name, QCPlugInAttributeNameKey, kQCPlugIn_Description, QCPlugInAttributeDescriptionKey, nil];
 }
 
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {
     // TODO - localize?
     if ([key isEqualToString:@"inputImage"])
         return [NSDictionary dictionaryWithObjectsAndKeys:@"Image", QCPortAttributeNameKey, nil];
+    else if ([key isEqualToString:@"inputDestinationFilePath"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Destination File Path", QCPortAttributeNameKey, nil];
     else if ([key isEqualToString:@"inputWriteSignal"])
         return [NSDictionary dictionaryWithObjectsAndKeys:@"Write Signal", QCPortAttributeNameKey, nil];
     return nil;
