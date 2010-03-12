@@ -38,6 +38,7 @@
 		16BA96310A7EB9AC001E4983 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16BA96300A7EB9AC001E4983 /* Quartz.framework */; };
 		7238D5520DB6988600E9A42D /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7238D5500DB6988600E9A42D /* Settings.xib */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		D8A73E6A114AD77D007B53A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8A73E68114AD77D007B53A7 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		D8A73DDD114A2135007B53A7 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		D8A73DDE114A213D007B53A7 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
 		D8A73DDF114A219E007B53A7 /* Rakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
+		D8A73E69114AD77D007B53A7 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				D8A73DDF114A219E007B53A7 /* Rakefile */,
 				7238D5500DB6988600E9A42D /* Settings.xib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
+				D8A73E68114AD77D007B53A7 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7238D5520DB6988600E9A42D /* Settings.xib in Resources */,
+				D8A73E6A114AD77D007B53A7 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +260,14 @@
 				7238D5510DB6988600E9A42D /* English */,
 			);
 			name = Settings.xib;
+			sourceTree = "<group>";
+		};
+		D8A73E68114AD77D007B53A7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D8A73E69114AD77D007B53A7 /* English */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
