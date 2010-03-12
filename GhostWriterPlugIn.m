@@ -45,19 +45,11 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 }
 
 + (QCPlugInExecutionMode)executionMode {
-	/*
-	Return the execution mode of the plug-in: kQCPlugInExecutionModeProvider, kQCPlugInExecutionModeProcessor, or kQCPlugInExecutionModeConsumer.
-	*/
-
-	return kQCPlugInExecutionModeProcessor;
+    return kQCPlugInExecutionModeConsumer;
 }
 
 + (QCPlugInTimeMode)timeMode {
-	/*
-	Return the time dependency mode of the plug-in: kQCPlugInTimeModeNone, kQCPlugInTimeModeIdle or kQCPlugInTimeModeTimeBase.
-	*/
-
-	return kQCPlugInTimeModeNone;
+    return kQCPlugInTimeModeNone;
 }
 
 + (NSArray*)plugInKeys {
