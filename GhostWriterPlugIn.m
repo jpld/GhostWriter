@@ -9,7 +9,7 @@
 #import "GhostWriterPlugIn.h"
 
 #define	kQCPlugIn_Name				@"GhostWriter"
-#define	kQCPlugIn_Description		@"GhostWriter description"
+#define	kQCPlugIn_Description		@"This patch writes an image to disk on the rising edge of the 'Write Signal' input."
 
 
 // WORKAROUND - naming violation for cocoa memory management
