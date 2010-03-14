@@ -1,2 +1,5 @@
 
 [X] add sample composition
+[ ] actually save png image to disk!
+[ ] save as jpg
+[ ] allow some sort of format string to define save directory and file basename
