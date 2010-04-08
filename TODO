@@ -1,5 +1,6 @@
 
 [X] add sample composition
-[ ] actually save png image to disk!
-[ ] save as jpg
-[ ] allow some sort of format string to define save directory and file basename
+[ ] save as png to Destination File Path input
+[ ] have a setting that auto-appends a marker to the Destination File Path input - default yes
+[ ] change Destination File Path to something else, dirname + basename + extname
+[ ] have a setting to pick image format PNG vs JPEG
