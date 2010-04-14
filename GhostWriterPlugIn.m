@@ -25,6 +25,10 @@
 @end
 
 
+@interface GhostWriterPlugIn()
+- (BOOL)_saveImage;
+@end
+
 @implementation GhostWriterPlugIn
 
 @dynamic inputImage, inputDestinationFilePath, inputWriteSignal;
@@ -145,7 +149,7 @@
 
     GWDebugLogSelector();
 
-    // TODO - actually do something
+    [self _saveImage];
 
     return YES;
 }
@@ -164,6 +168,17 @@
     */
 
     GWDebugLogSelector();
+}
+
+#pragma mark -
+#pragma mark PRIVATE
+
+- (BOOL)_saveImage {
+    BOOL status = YES;
+
+    // TODO - do something
+
+    return status;
 }
 
 @end
