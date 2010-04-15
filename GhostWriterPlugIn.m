@@ -215,8 +215,9 @@
 
     // figure out the save location
     NSString* filePath = [self.inputDestinationFilePath stringByExpandingTildeInPath];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         GWDebugLog(@"file at path '%@' already exists, will overwrite", filePath);
+    }
     NSURL* fileURL = [NSURL fileURLWithPath:filePath];
 
     // create image destination and write it to disk
