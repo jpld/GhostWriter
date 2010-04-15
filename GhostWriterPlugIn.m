@@ -176,7 +176,14 @@
 - (BOOL)_saveImage {
     BOOL status = YES;
 
-    // TODO - do something
+    // figure out the save location
+    NSString* filePath = [self.inputDestinationFilePath stringByExpandingTildeInPath];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+        GWDebugLog(@"file at path '%@' already exists, will be overwritten", filePath);
+    NSURL* fileURL = [[NSURL alloc] initFileURLWithPath:filePath];
+    GWDebugLog(@"saving file at URL '%@'", fileURL);
+
+    [fileURL release];
 
     return status;
 }
