@@ -1,7 +1,7 @@
 
 [X] add sample composition
 [X] save as png to Destination File Path input
-[~] sort out if the plug-in supports 10.5 or not (not currently due to usage of 10.6 functions)
+[X] sort out if the plug-in supports 10.5 or not - NO due to use of NS_RETURNS_RETAINED and CGColorSpaceCopyName())
 [ ] have a setting that auto-appends a marker to the Destination File Path input - default yes
 [ ] change Destination File Path to something else, dirname + basename + extname
 [ ] have a setting to pick image format PNG vs JPEG
