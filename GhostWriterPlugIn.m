@@ -176,14 +176,65 @@
 - (BOOL)_saveImage {
     BOOL status = YES;
 
+    // divine pixel format from colorspace
+    CGColorSpaceRef colorSpace = [self.inputImage imageColorSpace];
+    NSString* pixelFormat = nil;
+    if (CGColorSpaceGetModel(colorSpace) == kCGColorSpaceModelMonochrome)
+        pixelFormat = QCPlugInPixelFormatI8;
+    else if (CGColorSpaceGetModel(colorSpace) == kCGColorSpaceModelRGB)
+#if __BIG_ENDIAN__
+        pixelFormat = QCPlugInPixelFormatARGB8;
+#else
+        pixelFormat = QCPlugInPixelFormatBGRA8;
+#endif
+
+    if (!pixelFormat) {
+        CFStringRef colorSpaceName = CGColorSpaceCopyName(colorSpace);
+        NSLog(@"ERROR - unable to divine pixel format for color space '%@', image input not saved", colorSpaceName);
+        CFRelease(colorSpaceName);
+        return NO;
+    }
+
+    // create in-memory buffer of input image
+    if (![self.inputImage lockBufferRepresentationWithPixelFormat:pixelFormat colorSpace:colorSpace forBounds:[self.inputImage imageBounds]]) {
+        CFStringRef colorSpaceName = CGColorSpaceCopyName(colorSpace);
+        NSLog(@"ERROR - unable to craete memory buffer representation of input image with pixelFormat '%@' and color space '%@'", pixelFormat, colorSpaceName);
+        CFRelease(colorSpaceName);
+        return NO;
+    }
+
+    // create CGImage from buffer
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, [self.inputImage bufferBaseAddress], [self.inputImage bufferPixelsHigh]*[self.inputImage bufferBytesPerRow], NULL);
+    CGImageRef image = CGImageCreate([self.inputImage bufferPixelsWide], [self.inputImage bufferPixelsHigh], 8, (pixelFormat == QCPlugInPixelFormatI8 ? 8 : 32), [self.inputImage bufferBytesPerRow], colorSpace, (pixelFormat == QCPlugInPixelFormatI8 ? 0 : kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host), dataProvider, NULL, false, kCGRenderingIntentDefault);
+    CGDataProviderRelease(dataProvider);
+    if (!image) {
+        NSLog(@"ERROR - filed to create CGImage from input image memory buffer provider");
+        status = NO;
+        goto cleanup;
+    }
+
     // figure out the save location
     NSString* filePath = [self.inputDestinationFilePath stringByExpandingTildeInPath];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-        GWDebugLog(@"file at path '%@' already exists, will be overwritten", filePath);
-    NSURL* fileURL = [[NSURL alloc] initFileURLWithPath:filePath];
-    GWDebugLog(@"saving file at URL '%@'", fileURL);
+        GWDebugLog(@"file at path '%@' already exists, will overwrite", filePath);
+    NSURL* fileURL = [NSURL fileURLWithPath:filePath];
 
-    [fileURL release];
+    // create image destination and write it to disk
+    CGImageDestinationRef imageDestimation = CGImageDestinationCreateWithURL((CFURLRef)fileURL, kUTTypePNG, 1, NULL);
+    if (!imageDestimation) {
+        NSLog(@"ERROR - failed to craete image destination with URL '%@'", fileURL);
+        status = NO;
+        goto cleanup;
+    }
+    CGImageDestinationAddImage(imageDestimation, image, NULL);
+    GWDebugLog(@"saving file at URL '%@'", fileURL);
+    status = CGImageDestinationFinalize(imageDestimation);
+    CFRelease(imageDestimation);
+
+cleanup:
+    CGImageRelease(image);
+
+    [self.inputImage unlockBufferRepresentation];
 
     return status;
 }
