@@ -1,2 +1,5 @@
-v0.1.0 (12 Mar 2010)
+v0.1.1 (15 Apr 2010)
+* remove PPC from binary as it requires 10.6 or later
+
+v0.1.0 (15 Apr 2010)
 * initial release
