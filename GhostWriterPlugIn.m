@@ -220,8 +220,22 @@
     }
     NSURL* fileURL = [NSURL fileURLWithPath:filePath];
 
+    // divine image type from file extension, defaults to PNG
+    NSString* extension = [filePath pathExtension];
+    CFStringRef imageType = NULL;
+    if ([extension isEqualToString:@"png"] || [extension isEqualToString:@""])
+        imageType = kUTTypePNG;
+    else if ([extension isEqualToString:@"jpg"] || [extension isEqualToString:@"jpeg"])
+        imageType = kUTTypeJPEG;
+    else if ([extension isEqualToString:@"tif"] || [extension isEqualToString:@"tiff"])
+        imageType = kUTTypeTIFF;
+    else {
+        NSLog(@"ERROR - unable to divine image type from file extension '%@', defaulting to PNG", extension);
+        imageType = kUTTypePNG;
+    }
+
     // create image destination and write it to disk
-    CGImageDestinationRef imageDestimation = CGImageDestinationCreateWithURL((CFURLRef)fileURL, kUTTypePNG, 1, NULL);
+    CGImageDestinationRef imageDestimation = CGImageDestinationCreateWithURL((CFURLRef)fileURL, imageType, 1, NULL);
     if (!imageDestimation) {
         NSLog(@"ERROR - failed to craete image destination with URL '%@'", fileURL);
         status = NO;
