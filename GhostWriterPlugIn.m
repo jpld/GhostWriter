@@ -221,7 +221,7 @@
     NSURL* fileURL = [NSURL fileURLWithPath:filePath];
 
     // divine image type from file extension, defaults to PNG
-    NSString* extension = [filePath pathExtension];
+    NSString* extension = [[filePath pathExtension] lowercaseString];
     CFStringRef imageType = NULL;
     if ([extension isEqualToString:@"png"] || [extension isEqualToString:@""])
         imageType = kUTTypePNG;
