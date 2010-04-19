@@ -4,4 +4,5 @@
 [X] sort out if the plug-in supports 10.5 or not - NO due to use of NS_RETURNS_RETAINED and CGColorSpaceCopyName())
 [ ] have a setting that auto-appends a marker to the Destination File Path input - default yes
 [ ] change Destination File Path to something else, dirname + basename + extname
-[ ] have a setting to pick image format PNG vs JPEG
+[~] have a setting to pick image format PNG vs JPEG (currently divines png, tiff, jpeg, type from Destination File Path)
+[ ] some flavor of testing would be nice
