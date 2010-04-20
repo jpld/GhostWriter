@@ -218,21 +218,23 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         GWDebugLog(@"file at path '%@' already exists, will overwrite", filePath);
     }
-    NSURL* fileURL = [NSURL fileURLWithPath:filePath];
 
     // divine image type from file extension, defaults to PNG
     NSString* extension = [[filePath pathExtension] lowercaseString];
     CFStringRef imageType = NULL;
-    if ([extension isEqualToString:@"png"] || [extension isEqualToString:@""])
+    if ([extension isEqualToString:@"png"])
         imageType = kUTTypePNG;
     else if ([extension isEqualToString:@"jpg"] || [extension isEqualToString:@"jpeg"])
         imageType = kUTTypeJPEG;
     else if ([extension isEqualToString:@"tif"] || [extension isEqualToString:@"tiff"])
         imageType = kUTTypeTIFF;
     else {
-        NSLog(@"ERROR - unable to divine image type from file extension '%@', defaulting to PNG", extension);
+        if (![extension isEqualToString:@""])
+            NSLog(@"ERROR - unable to divine image type from file extension '%@', defaulting to PNG", extension);
+        filePath = [NSString stringWithFormat:@"%@.png", filePath];
         imageType = kUTTypePNG;
     }
+    NSURL* fileURL = [NSURL fileURLWithPath:filePath];
 
     // create image destination and write it to disk
     CGImageDestinationRef imageDestimation = CGImageDestinationCreateWithURL((CFURLRef)fileURL, imageType, 1, NULL);
