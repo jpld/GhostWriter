@@ -1,3 +1,7 @@
+v0.1.2 (19 Apr 2010)
+* improve robustness of image type inference from destination file path
+* fix rendering glitch of missing Clear patch in sample project
+
 v0.1.1 (15 Apr 2010)
 * remove PPC from binary as it requires 10.6 or later
 
